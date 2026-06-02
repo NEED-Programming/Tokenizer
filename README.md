@@ -52,7 +52,7 @@ Perfect for security research, red teaming, and learning Windows token manipulat
 cl.exe /W4 /O2 /MT main.c /link /OUT:main.exe
 ```
 
-### 3. Build on **Ubuntu/Debian (Cross-Compile with MinGW
+### 3. Build on **Ubuntu/Debian** (Cross-Compile with MinGW
 
 ```cmd
 x86_64-w64-mingw32-gcc main.c -o main.exe \
@@ -84,3 +84,38 @@ main.exe services.exe
 [+] Done.
 ```
 
+`A new cmd.exe window will appear running with the duplicated token (typically SYSTEM).`
+
+## ⚠️ Important Notes & Warnings
+
+Educational / Research Use Only — This demonstrates Windows token mechanics.
+Requires administrative privileges to enable SeDebugPrivilege.
+May be detected by antivirus / EDR solutions (normal for token manipulation tools).
+Works best against SYSTEM services that are PPL-protected.
+The spawned cmd.exe inherits the full privilege set of the target process.
+
+
+## 📂 Project Structure
+```cmd
+├── main.c          ← Main source code
+├── main.exe        ← Compiled binary
+└── README.md       ← This file
+```
+
+## 🔧 How It Works (High-Level)
+
+EnableSeDebugPrivilege() — Grants debug rights to the current process
+FindProcessPID() — Uses CreateToolhelp32Snapshot to locate target by name
+get_process_handle() — Opens process with PROCESS_QUERY_LIMITED_INFORMATION
+DuplicateProcessToken() — Opens token → DuplicateTokenEx (SecurityDelegation + MAXIMUM_ALLOWED)
+EnableAllPrivileges() — Enables every privilege available on the new token
+SpawnProcessWithToken() — CreateProcessWithTokenW to launch cmd.exe
+
+
+## 📜 License
+MIT License — feel free to use, modify, and distribute.
+
+## ❤️ Disclaimer
+Created as a clean, well-documented example of Windows token duplication.
+Use responsibly and only on systems you own or have explicit permission to test.
+The author is not responsible for any misuse.
