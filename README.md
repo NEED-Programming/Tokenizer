@@ -70,6 +70,7 @@ Find processes running as **NT Authority\System**
 ```cmd
 tasklist /v /fi "USERNAME eq NT AUTHORITY\SYSTEM"
 ```
+Then execute 
 ```cmd
 main.exe services.exe
 ```
