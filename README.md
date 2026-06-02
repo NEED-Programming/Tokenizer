@@ -1,6 +1,4 @@
-# Tokenizer
-A clean, single-file utility to duplicate a target process's token
-# Windows Token Duplication Tool
+# Tokenizer - Windows Token Duplication Tool
 
 **A clean, single-file utility to duplicate a target process's token (including many PPL-protected processes) and spawn a high-privilege `cmd.exe`.**
 
