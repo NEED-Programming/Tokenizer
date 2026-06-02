@@ -88,11 +88,11 @@ main.exe services.exe
 
 ## ⚠️ Important Notes & Warnings
 
-Educational / Research Use Only — This demonstrates Windows token mechanics.
-Requires administrative privileges to enable SeDebugPrivilege.
-May be detected by antivirus / EDR solutions (normal for token manipulation tools).
-Works best against SYSTEM services that are PPL-protected.
-The spawned cmd.exe inherits the full privilege set of the target process.
+- Educational / Research Use Only — This demonstrates Windows token mechanics.
+- Requires administrative privileges to enable SeDebugPrivilege.
+- May be detected by antivirus / EDR solutions (normal for token manipulation tools).
+- Works best against SYSTEM services that are PPL-protected.
+- The spawned cmd.exe inherits the full privilege set of the target process.
 
 
 ## 📂 Project Structure
@@ -104,12 +104,12 @@ The spawned cmd.exe inherits the full privilege set of the target process.
 
 ## 🔧 How It Works (High-Level)
 
-EnableSeDebugPrivilege() — Grants debug rights to the current process
-FindProcessPID() — Uses CreateToolhelp32Snapshot to locate target by name
-get_process_handle() — Opens process with PROCESS_QUERY_LIMITED_INFORMATION
-DuplicateProcessToken() — Opens token → DuplicateTokenEx (SecurityDelegation + MAXIMUM_ALLOWED)
-EnableAllPrivileges() — Enables every privilege available on the new token
-SpawnProcessWithToken() — CreateProcessWithTokenW to launch cmd.exe
+1. EnableSeDebugPrivilege() — Grants debug rights to the current process
+2. FindProcessPID() — Uses CreateToolhelp32Snapshot to locate target by name
+3. get_process_handle() — Opens process with PROCESS_QUERY_LIMITED_INFORMATION
+4. DuplicateProcessToken() — Opens token → DuplicateTokenEx (SecurityDelegation + MAXIMUM_ALLOWED)
+5. EnableAllPrivileges() — Enables every privilege available on the new token
+6. SpawnProcessWithToken() — CreateProcessWithTokenW to launch cmd.exe
 
 
 ## 📜 License
