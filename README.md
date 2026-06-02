@@ -50,7 +50,7 @@ Perfect for security research, red teaming, and learning Windows token manipulat
 cl.exe /W4 /O2 /MT main.c /link /OUT:main.exe
 ```
 
-### 3. Build on **Ubuntu/Debian** (Cross-Compile with MinGW
+### 3. Build on **Ubuntu/Debian** (Cross-Compile with MinGW)
 
 ```cmd
 x86_64-w64-mingw32-gcc main.c -o main.exe \
