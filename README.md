@@ -65,7 +65,11 @@ main.exe <process_name>
 ```
 
 ## Example
+Find processes running as **NT Authority\System**
 
+```cmd
+tasklist /v /fi "USERNAME eq NT AUTHORITY\SYSTEM"
+```
 ```cmd
 main.exe services.exe
 ```
