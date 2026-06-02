@@ -53,3 +53,34 @@ cl.exe /W4 /O2 /MT main.c /link /OUT:main.exe
 ```
 
 ### 3. Build on **Ubuntu/Debian (Cross-Compile with MinGW
+
+```cmd
+x86_64-w64-mingw32-gcc main.c -o main.exe \
+    -static -ladvapi32 -luserenv -lkernel32 \
+    -s -O2 -fomit-frame-pointer -fno-stack-protector
+```
+
+## 🚀 Usage
+
+```cmd
+main.exe <process_name>
+```
+
+## Example
+
+```cmd
+main.exe services.exe
+```
+### Expected Successful Output:
+```cmd
+[+] SeDebugPrivilege enabled.
+[+] Found process: services.exe PID: 1234
+[+] Target PID: 1234
+[+] Got handle to PID 1234
+[+] Opened process token.
+[+] Token duplicated successfully.
+[+] Process spawned successfully.
+[+] PID: 5678 TID: 9012
+[+] Done.
+```
+
