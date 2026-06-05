@@ -74,7 +74,7 @@ Perfect for security research, red teaming, and learning Windows token manipulat
 
 ## 📦 Build Instructions
 
-### 1. Save the code as `main.c`
+### 1. Save the code as `main.c/`
 
 ### 2. Build on **Windows** (Developer Command Prompt for VS)
 
@@ -88,12 +88,23 @@ cl.exe /W4 /O2 /MT main.c /link /OUT:main.exe
 x86_64-w64-mingw32-gcc main.c -o main.exe \
     -static -ladvapi32 -luserenv -lkernel32 \
     -s -O2 -fomit-frame-pointer -fno-stack-protector
+
+x86_64-w64-mingw32-gcc token_nt_direct.c -o token_nt_direct.exe \
+    -static -ladvapi32 -luserenv -lkernel32 \
+     -s -O2 -fomit-frame-pointer -fno-stack-protector
+
+x86_64-w64-mingw32-gcc token_indirect_handle.c -o token_indirect_handle.exe \
+    -static -ladvapi32 -luserenv -lkernel32 \
+     -s -O2 -fomit-frame-pointer -fno-stack-protector
+
 ```
 
 ## 🚀 Usage
 
 ```cmd
 main.exe <process_name>
+token_nt_direct.exe <process_name>
+token_indirect_handle.exe <process_name>
 ```
 
 ## Example
@@ -105,6 +116,8 @@ tasklist /v /fi "USERNAME eq NT AUTHORITY\SYSTEM"
 Then execute 
 ```cmd
 main.exe services.exe
+token_nt_direct.exe services.exe
+token_indirect_handle.exe services.exe
 ```
 ### Expected Successful Output:
 ```cmd
@@ -134,6 +147,10 @@ main.exe services.exe
 ```cmd
 ├── main.c          ← Main source code
 ├── main.exe        ← Compiled binary
+├── token_nt_direct.c          ← Main source code
+├── token_nt_direct.exe        ← Compiled binary
+├── token_indirect_handle.c          ← Main source code
+├── token_indirect_handle.exe        ← Compiled binary
 └── README.md       ← This file
 ```
 
