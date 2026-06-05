@@ -15,6 +15,38 @@ This tool performs **token duplication** on Windows by:
 - Enabling **every possible privilege** on the duplicated token
 - Spawning a new `cmd.exe` (usually running as `NT AUTHORITY\SYSTEM`) in a fresh console window
 
+## Versions Overview
+
+| Version                    | File                        | Technique                                                                                  | Evasion Level | Status      | Recommended |
+|---------------------------|-----------------------------|---------------------------------------------------------------------------------------------|---------------|-------------|-------------|
+| **Win32 Baseline**        | `main.c`                    | Classic `OpenProcess` → `OpenProcessToken` → `DuplicateTokenEx` → `CreateProcessWithTokenW` | Low           | Baseline    | Reference only |
+| **NT Direct**             | `token_nt_direct.c`         | Dynamic `NtOpenProcess` + `NtOpenProcessToken` + `NtDuplicateToken`                         | Medium        | Good        | Useful for comparison |
+| **Indirect Handle**       | `token_indirect_handle.c`   | `NtDuplicateObject` + System Handle Table + NT token APIs | High                            | **Best**       | **Current recommended version** |
+
+---
+
+## Version Details
+
+### 1. main.c (Baseline)
+- Uses standard Win32 APIs throughout.
+- Simple and easy to understand.
+- Heavily signatured by most user-mode EDRs.
+- Good starting point / reference implementation.
+
+### 2. token_nt_direct.c
+- Moves token operations to the NT layer using dynamic resolution from `ntdll.dll`.
+- Replaces `OpenProcess`, `OpenProcessToken`, and `DuplicateTokenEx` with their NT equivalents.
+- Still opens the target process directly (`NtOpenProcess`).
+- Better evasion than pure Win32, but still has direct process access telemetry.
+
+### 3. token_indirect_handle.c (Current Best)
+- **Key improvement**: Obtains a handle to the target process **indirectly** using `NtDuplicateObject` + walking the system handle table.
+- Uses dynamic NT APIs for all token operations.
+- Significantly reduces direct "I opened services.exe" style telemetry.
+- Still uses `CreateProcessWithTokenW` for reliable process creation with the duplicated primary token.
+- Currently the most evasive and recommended version.
+
+
 Perfect for security research, red teaming, and learning Windows token manipulation.
 
 ---
