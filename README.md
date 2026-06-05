@@ -46,9 +46,6 @@ This tool performs **token duplication** on Windows by:
 - Still uses `CreateProcessWithTokenW` for reliable process creation with the duplicated primary token.
 - Currently the most evasive and recommended version.
 
-
-Perfect for security research, red teaming, and learning Windows token manipulation.
-
 ---
 
 ## ✨ Features
