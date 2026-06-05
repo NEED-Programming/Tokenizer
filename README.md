@@ -21,7 +21,6 @@ This tool performs **token duplication** on Windows by:
 - ✅ Automatically enables **all privileges** on the new token
 - ✅ Minimal permissions required to open the target process
 - ✅ Clean, well-commented code with good error handling
-- ✅ No external dependencies — pure Win32 API
 - ✅ Single source file, easy to compile and use
 
 
