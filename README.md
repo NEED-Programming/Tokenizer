@@ -15,6 +15,16 @@ This tool performs **token duplication** on Windows by:
 - Enabling **every possible privilege** on the duplicated token
 - Spawning a new `cmd.exe` (usually running as `NT AUTHORITY\SYSTEM`) in a fresh console window
 
+## ✨ Features
+
+- ✅ Works on many PPL-protected processes
+- ✅ Automatically enables **all privileges** on the new token
+- ✅ Minimal permissions required to open the target process
+- ✅ Clean, well-commented code with good error handling
+- ✅ No external dependencies — pure Win32 API
+- ✅ Single source file, easy to compile and use
+
+
 ## Versions Overview
 
 | Version                    | File                        | Technique                                                                                  | Evasion Level | Status      | Recommended |
@@ -45,17 +55,6 @@ This tool performs **token duplication** on Windows by:
 - Significantly reduces direct "I opened services.exe" style telemetry.
 - Still uses `CreateProcessWithTokenW` for reliable process creation with the duplicated primary token.
 - Currently the most evasive and recommended version.
-
----
-
-## ✨ Features
-
-- ✅ Works on many PPL-protected processes
-- ✅ Automatically enables **all privileges** on the new token
-- ✅ Minimal permissions required to open the target process
-- ✅ Clean, well-commented code with good error handling
-- ✅ No external dependencies — pure Win32 API
-- ✅ Single source file, easy to compile and use
 
 ---
 
