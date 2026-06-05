@@ -74,12 +74,16 @@ Perfect for security research, red teaming, and learning Windows token manipulat
 
 ## 📦 Build Instructions
 
-### 1. Save the code as `main.c/`
+### 1. Save the code as `main.c / token_nt_direct.c / token_indirect_handle.c`
 
 ### 2. Build on **Windows** (Developer Command Prompt for VS)
 
 ```cmd
 cl.exe /W4 /O2 /MT main.c /link /OUT:main.exe
+
+cl.exe /W4 /O2 /MT token_nt_direct.c /link /OUT:token_nt_direct.exe
+
+cl.exe /W4 /O2 /MT token_indirect_handle.c /link /OUT:token_indirect_handle.exe
 ```
 
 ### 3. Build on **Ubuntu/Debian** (Cross-Compile with MinGW)
